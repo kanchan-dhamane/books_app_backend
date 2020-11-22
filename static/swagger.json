@@ -1,0 +1,132 @@
+
+{
+  "openapi": "3.0.0",
+  "info": {
+    "description": "",
+    "version": "1.0.0",
+    "title": "Books API",
+    "license": {
+      "name": "",
+      "url": ""
+    }
+  },
+  "servers": [
+    {
+      "url": "/"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Book Request",
+      "description": "Example API for requesting and return book requests"
+    }
+  ],
+  "paths": {
+    "/books": {
+      "parameters": [
+        {
+          "name": "ids",
+          "in": "query",
+          "required": false,
+          "description": "Comma seperated ID of the books",
+          "type": "string"
+        },
+        {
+          "name": "author",
+          "in": "query",
+          "required": false,
+          "description": "Author of the book",
+          "type": "string"
+        },
+        {
+          "name": "title",
+          "in": "query",
+          "required": false,
+          "description": "title of the book",
+          "type": "string"
+        },
+        {
+          "name": "search",
+          "in": "query",
+          "required": false,
+          "description": "space seperated author name and book name",
+          "type": "string"
+        },
+        {
+          "name": "topic",
+          "in": "query",
+          "required": false,
+          "description": "comma seperated topics of the book",
+          "type": "string"
+        },
+        {
+          "name": "languages",
+          "in": "query",
+          "required": false,
+          "description": "comma seperated languages of the book",
+          "type": "string"
+        },
+        {
+          "name": "mime_type",
+          "in": "query",
+          "required": false,
+          "description": "mime type of the book",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Book Request"
+        ],
+        "summary": "Returns bookRequests",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/components/schemas/books"
+            }
+          },
+          "400": {
+            "description": "Bad query string",
+            "schema": {
+              "message": "Invalid query params",
+              "valid query params": ["ids", "author", "title", "topic", "languages", "mime_type", "page", "search"]
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "schema": {
+              "message": "Internal server error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "books": {
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "number",
+            "format": "number"
+          },
+          "next_page": {
+            "type": "string",
+            "format": "string"
+          },
+          "previous_page": {
+            "type": "string",
+            "format": "string"
+          },
+          "results": {
+            "type": "array",
+            "format": "object"
+          }
+        }
+      }
+    }
+  }
+
+}
