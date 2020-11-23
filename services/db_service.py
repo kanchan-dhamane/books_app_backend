@@ -1,7 +1,7 @@
 import logging
 import sqlalchemy
 from threading import Lock
-
+import traceback
 #from configs import (MYSQL_USERNAME,
 #                    MYSQL_PASSWORD,
 #                    MYSQL_DB_NAME,
@@ -57,5 +57,5 @@ class DbService:
                 with db_connection_obj.connect() as conn:
                     return conn.execute(stmt)
             except Exception as error:
-                #print('Error in getting data for mobile number: {} - {}'.format(mobile_number, error))
+                print(traceback.format_exc())
                 retry += 1
